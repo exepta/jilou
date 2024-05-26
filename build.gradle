@@ -43,14 +43,17 @@ dependencies {
 
     implementation 'org.slf4j:slf4j-api:2.0.13'
     implementation 'org.slf4j:slf4j-simple:2.0.13'
+    implementation 'org.jetbrains:annotations:24.1.0'
 
-
+    compileOnly 'org.projectlombok:lombok:1.18.32'
 
     implementation "org.lwjgl:lwjgl"
     implementation "org.lwjgl:lwjgl-glfw"
     implementation "org.lwjgl:lwjgl-nanovg"
     implementation "org.lwjgl:lwjgl-opengl"
     implementation "org.lwjgl:lwjgl-stb"
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
 
     runtimeOnly "org.lwjgl:lwjgl::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-glfw::$lwjglNatives"
