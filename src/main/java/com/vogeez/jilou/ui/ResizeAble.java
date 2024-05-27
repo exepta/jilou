@@ -2,7 +2,7 @@ package com.vogeez.jilou.ui;
 
 /**
  * Interface for force resizeable functions to the implemented class.
- * Is used at {@link AbstractWindow}
+ * Is used at {@link AbstractWindowFrame}
  * @since 1.0.0
  * @author Daniel Ramke
  */
