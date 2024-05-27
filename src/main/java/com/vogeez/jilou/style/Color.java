@@ -79,6 +79,8 @@ public class Color {
     public static final Color LIGHTCYAN = new Color("#E0FFFF");
     public static final Color BLOOD_RED = new Color("#8a0303");
 
+    public static final Color transparent = new Color(0, 0, 0, 0);
+
     /**
      * Constructor created a color from the primitive type.
      * Primitive numbers can be found online or can random set by the user.
