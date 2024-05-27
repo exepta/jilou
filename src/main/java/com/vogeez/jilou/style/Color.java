@@ -420,7 +420,7 @@ public class Color {
             errorBuilder.append(" BLUE");
         }
 
-        if(errorBuilder.isEmpty()) {
+        if(!errorBuilder.isEmpty()) {
             LOG.warn("Color values out side of RGBA standard range [{} ]", errorBuilder);
             return false;
         }
