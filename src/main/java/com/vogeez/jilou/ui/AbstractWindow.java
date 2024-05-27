@@ -57,6 +57,8 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
                     if(scene == null) {
                         scene = new Scene();
                     }
+                } else {
+                    this.scene = null;
                 }
                 delta = 0;
             }
