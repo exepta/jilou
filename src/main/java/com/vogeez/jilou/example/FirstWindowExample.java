@@ -10,7 +10,7 @@ public class FirstWindowExample {
     public static void main(String[] args) {
         UIApplication.load(args);
         Window window = ApplicationFactory.createWindow(null, "Test", Window.class);
-        window.setBackground(Color.SEAGREEN);
+        window.setBackground(Color.CORAL);
     }
 
 }
