@@ -21,8 +21,8 @@ public abstract class AbstractWindow implements ResizeAble {
 
     private final Logger LOG = LoggerFactory.getLogger(AbstractWindow.class);
 
-    public final int DEFAULT_WIDTH = 800;
-    public final int DEFAULT_HEIGHT = 600;
+    public static final int DEFAULT_WIDTH = 800;
+    public static final int DEFAULT_HEIGHT = 600;
 
     private final CountDownLatch async;
 
@@ -155,7 +155,7 @@ public abstract class AbstractWindow implements ResizeAble {
         }
 
         if(ApplicationFactory.WINDOW_MAP.containsKey(serial)) {
-            int index = 1;
+            int index = 0;
             for(String IDs : ApplicationFactory.WINDOW_MAP.keySet()) {
                 if(IDs.startsWith(serial) || IDs.startsWith(serial + "-")) {
                     index++;
