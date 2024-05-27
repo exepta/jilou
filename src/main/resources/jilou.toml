@@ -1,0 +1,7 @@
+# Configuration version 1.0.0
+nanovg.version = 3
+nanovg.flags = ["NVG_STENCIL_STROKES", "NVG_ANTIALIAS"]
+
+opengl.version = 4.6
+opengl.features.enabled = []
+opengl.features.disabled = []
