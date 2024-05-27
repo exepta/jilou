@@ -25,7 +25,7 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
         this.enableNVG = true;
         this.enableUI = true;
         this.renderingAtMinimized = false;
-        this.scene = null;
+        this.scene = new Scene();
     }
 
     protected abstract void setup();
