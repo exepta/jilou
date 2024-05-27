@@ -23,8 +23,8 @@ public abstract class AbstractUIContainedWindow extends AbstractWindow {
     protected void update() {
         while (!shouldClose()) {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-            GL11.glClearColor(0.7f, 0.0f
-                    , 0.3f, 1.0f);
+            GL11.glClearColor(background.getRedPercent(), background.getGreenPercent()
+                    , background.getBluePercent(), background.getAlphaPercent());
 
             GLFW.glfwSwapBuffers(openglID);
             GLFW.glfwPollEvents();

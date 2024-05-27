@@ -1,7 +1,9 @@
 package com.vogeez.jilou.ui;
 
 import com.vogeez.jilou.ApplicationFactory;
+import com.vogeez.jilou.style.Color;
 import lombok.Getter;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.nanovg.NanoVGGL2;
 import org.lwjgl.nanovg.NanoVGGL3;
@@ -42,6 +44,8 @@ public abstract class AbstractWindow implements ResizeAble {
     private int width;
     @Getter
     private int height;
+    @Getter
+    protected Color background;
 
     private boolean created;
     private boolean vsync;
@@ -66,6 +70,7 @@ public abstract class AbstractWindow implements ResizeAble {
         this.title = getClass().getSimpleName();
         this.width = DEFAULT_WIDTH;
         this.height = DEFAULT_HEIGHT;
+        this.setBackground(Color.WHITE);
         this.created = false;
         this.thread = ApplicationFactory.generateThread(this::run, this);
         if(thread != null) {
@@ -268,6 +273,25 @@ public abstract class AbstractWindow implements ResizeAble {
      *
      * ############################################################################################ */
 
+    public void setBackground(Color color) {
+        if(color == null) {
+            color = Color.GREY;
+        }
+        this.background = color;
+    }
+
+    public void setBackground(int red, int green, int blue) {
+        this.setBackground(Color.rgb(red, green, blue));
+    }
+
+    public void setBackground(int red, int green, int blue, int alpha) {
+        this.setBackground(Color.rgba(red, green, blue, alpha));
+    }
+
+    public void setBackground(String hexadecimal) {
+        this.setBackground(Color.hexadecimal(hexadecimal));
+    }
+
     public void close() {
         _wait();
         GLFW.glfwSetWindowShouldClose(getOpenglID(), true);
@@ -298,10 +322,10 @@ public abstract class AbstractWindow implements ResizeAble {
     }
 
     public void setTitle(String title) {
-        this.title = title;
         if(title == null) {
-            this.title = getType();
+            title = getType();
         }
+        this.title = title;
         GLFW.glfwSetWindowTitle(getOpenglID(), title);
     }
 
