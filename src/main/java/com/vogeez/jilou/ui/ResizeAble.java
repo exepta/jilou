@@ -1,9 +1,21 @@
 package com.vogeez.jilou.ui;
 
+/**
+ * Interface for force resizeable functions to the implemented class.
+ * Is used at {@link AbstractWindow}
+ * @since 1.0.0
+ * @author Daniel Ramke
+ */
 public interface ResizeAble {
 
-    void setResizable(boolean resizable);
+    /**
+     * Function to set the resizeable state.
+     * @param resizeable the new state.
+     */
+    void setResizeable(boolean resizeable);
 
-    boolean isResizable();
-
+    /**
+     * @return {@link Boolean} - the current resizeable state.
+     */
+    boolean isResizeable();
 }

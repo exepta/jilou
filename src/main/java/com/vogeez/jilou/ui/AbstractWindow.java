@@ -27,6 +27,9 @@ public abstract class AbstractWindow implements ResizeAble {
     private final CountDownLatch async;
 
     @Getter
+    private Context context;
+
+    @Getter
     private final Thread thread;
     @Getter
     private final String uid;
@@ -43,19 +46,19 @@ public abstract class AbstractWindow implements ResizeAble {
     private boolean created;
     private boolean vsync;
 
-    @Getter
-    private Context context;
-
     /* ############################################################################################
      *
      *                                           Constructors
      *
      * ############################################################################################ */
 
-    public AbstractWindow() {
-        this(null);
-    }
-
+    /**
+     * Constructor for creating a new {@link AbstractWindow} object. The constructor will be implemented at all
+     * {@link Class}'s which implements (extends) this class. Please note that for window create the {@link ApplicationFactory}
+     * class is super helpful and flexible for include your own window implementations.
+     * @param uid the specified and unique window id.
+     * @see ApplicationFactory
+     */
     public AbstractWindow(String uid) {
         this.async = new CountDownLatch(1);
         this.uid = generateUID(uid);
@@ -77,6 +80,13 @@ public abstract class AbstractWindow implements ResizeAble {
      * ############################################################################################ */
 
 
+    /**
+     * Function which runs our implementations. This is called at the window {@link Thread}.
+     * This is the lifecycle for the {@link AbstractWindow}.
+     * First call {@link #initialize()} for initialize things like special events or handler's.
+     * Second call {@link #update()} and this will loop! Note that.
+     * Last call {@link #destroy()} for clean up.
+     */
     protected void run() {
         initialize();
         update();
@@ -109,12 +119,12 @@ public abstract class AbstractWindow implements ResizeAble {
     public abstract void destroy();
 
     @Override
-    public void setResizable(boolean resizable) {
+    public void setResizeable(boolean resizable) {
 
     }
 
     @Override
-    public boolean isResizable() {
+    public boolean isResizeable() {
         return false;
     }
 
@@ -196,7 +206,7 @@ public abstract class AbstractWindow implements ResizeAble {
      */
     protected void build() {
         LOG.info("Build window [ {} ]", getUid());
-        setResizable(true);
+        setResizeable(true);
         this.openglID = GLFW.glfwCreateWindow(width, height, title, NULL, NULL);
         if(openglID <= NULL) {
             this.created = false;
@@ -258,9 +268,23 @@ public abstract class AbstractWindow implements ResizeAble {
      *
      * ############################################################################################ */
 
+    public void close() {
+        _wait();
+        GLFW.glfwSetWindowShouldClose(getOpenglID(), true);
+    }
+
     public boolean isCreated() {
         _wait();
         return created;
+    }
+
+    public void setHeight(int height) {
+        _wait();
+        if(height < 0) {
+            height = 0;
+        }
+        this.height = height;
+        GLFW.glfwSetWindowSize(getOpenglID(), getWidth(), height);
     }
 
     public long getOpenglID() {
@@ -303,14 +327,5 @@ public abstract class AbstractWindow implements ResizeAble {
         }
         this.width = width;
         GLFW.glfwSetWindowSize(getOpenglID(), width, getHeight());
-    }
-
-    public void setHeight(int height) {
-        _wait();
-        if(height < 0) {
-            height = 0;
-        }
-        this.height = height;
-        GLFW.glfwSetWindowSize(getOpenglID(), getWidth(), height);
     }
 }
