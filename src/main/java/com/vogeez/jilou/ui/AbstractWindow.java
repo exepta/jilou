@@ -12,6 +12,9 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
 
     private boolean enableNVG;
     private boolean renderingAtMinimized;
+    private boolean enableUI;
+
+    private Scene scene;
 
     public AbstractWindow() {
         this(null);
@@ -20,7 +23,9 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
     public AbstractWindow(String uid) {
         super(uid);
         this.enableNVG = true;
+        this.enableUI = true;
         this.renderingAtMinimized = false;
+        this.scene = null;
     }
 
     protected abstract void setup();
@@ -48,6 +53,11 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
 
             if(delta >= 1.0) {
                 update((float) (delta * fps));
+                if(enableUI) {
+                    if(scene == null) {
+                        scene = new Scene();
+                    }
+                }
                 delta = 0;
             }
 

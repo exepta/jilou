@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class ApplicationFactory {
 
@@ -211,5 +212,17 @@ public final class ApplicationFactory {
      */
     public static int activeThreadCount() {
         return THREAD_MAP.size();
+    }
+
+    /* ############################################################################################
+     *
+     *                                    General Function
+     *
+     * ############################################################################################ */
+
+    private static final AtomicLong idCounter = new AtomicLong();
+
+    public static String giveUniqueID() {
+        return String.valueOf(idCounter.getAndIncrement());
     }
 }

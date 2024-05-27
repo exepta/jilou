@@ -8,8 +8,6 @@ public class Window extends AbstractWindow {
 
     public Window(String uid) {
         super(uid);
-        this.setEnableNVG(true);
-        this.setRenderingAtMinimized(false);
     }
 
     @Override
