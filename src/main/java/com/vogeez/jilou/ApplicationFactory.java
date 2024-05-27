@@ -220,9 +220,15 @@ public final class ApplicationFactory {
      *
      * ############################################################################################ */
 
-    private static final AtomicLong idCounter = new AtomicLong();
+    private static final AtomicLong idCounterWidget = new AtomicLong();
+    private static final AtomicLong idCounterRender = new AtomicLong();
 
     public static String giveUniqueID() {
-        return String.valueOf(idCounter.getAndIncrement());
+        return String.valueOf(idCounterWidget.getAndIncrement());
     }
+
+    public static String giveRenderID() {
+        return String.valueOf(idCounterRender.getAndIncrement());
+    }
+
 }
