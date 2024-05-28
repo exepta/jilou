@@ -14,9 +14,7 @@ public class FirstWindowExample {
         window.setBackground(Color.randomRGB());
 
         Rectangle rectangle = new Rectangle();
-        System.out.println("Before: " + window.getScene().getAllChildren().size());
         window.getScene().addChild(rectangle);
-        System.out.println("After: " + window.getScene().getAllChildren().size());
     }
 
 }
