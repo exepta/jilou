@@ -29,7 +29,6 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
 
     public void addChild(AbstractWidget widget) {
         if(!hasChild(widget.getLocalizedID())) {
-            EventManager.callEvent(new WidgetAddEvent(widget, this, getContainer()));
             widget.setParent(this);
             children.add(widget);
             if(isFirstLayerWidget()) {
@@ -38,6 +37,7 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
             } else {
                 widget.setContainer(getContainer());
             }
+            EventManager.callEvent(new WidgetAddEvent(widget, this, widget.getContainer()));
             return;
         }
         LOG.warn("Duplicate child ID: [ {} ] type [ {} ]", widget.getLocalizedID(), widget.getWidgetName());

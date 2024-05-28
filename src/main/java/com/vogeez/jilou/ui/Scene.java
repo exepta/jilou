@@ -25,7 +25,22 @@ public class Scene extends AbstractContainerWidget {
 
     }
 
-    public void mountChildren() {
+    public void pack() {
+        collect(this, allChildren);
+    }
 
+    private void collect(AbstractWidget root, List<AbstractWidget> widgets) {
+        if(root instanceof AbstractContainerWidget containerWidget) {
+            if(!containerWidget.isFirstLayerWidget()) {
+                widgets.add(containerWidget);
+            }
+        } else {
+            widgets.add(root);
+        }
+        if(root instanceof AbstractContainerWidget containerWidget) {
+            for(AbstractWidget widget : containerWidget.getChildren()) {
+                collect(widget, allChildren);
+            }
+        }
     }
 }
