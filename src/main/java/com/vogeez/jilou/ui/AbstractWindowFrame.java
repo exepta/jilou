@@ -1,6 +1,8 @@
 package com.vogeez.jilou.ui;
 
 import com.vogeez.jilou.ApplicationFactory;
+import com.vogeez.jilou.logic.Renderer;
+import com.vogeez.jilou.logic.graphics.WidgetBackgroundRenderer;
 import com.vogeez.jilou.style.Color;
 import lombok.Getter;
 import org.lwjgl.glfw.GLFW;
@@ -13,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
@@ -24,6 +28,9 @@ public abstract class AbstractWindowFrame implements ResizeAble {
 
     public static final int DEFAULT_WIDTH = 800;
     public static final int DEFAULT_HEIGHT = 600;
+
+    @Getter
+    private final List<Renderer> rendererList = new ArrayList<>();
 
     private final CountDownLatch async;
 
@@ -219,6 +226,8 @@ public abstract class AbstractWindowFrame implements ResizeAble {
             return;
         }
 
+        registerDefaultRenderers();
+
         GLFW.glfwMakeContextCurrent(openglID);
         GLFW.glfwSwapInterval(1);
         LOG.info("Build state [ {} ], successful!", getUid());
@@ -260,6 +269,49 @@ public abstract class AbstractWindowFrame implements ResizeAble {
      */
     protected void useViewport() {
         GL11.glViewport(0, 0, getWidth(), getHeight());
+    }
+
+    private void registerDefaultRenderers() {
+        addRenderer(new WidgetBackgroundRenderer());
+    }
+
+    /* ############################################################################################
+     *
+     *                                    Renderer Function
+     *
+     * ############################################################################################ */
+
+    public void addRenderer(Renderer renderer) {
+        if(hasRenderer(renderer.getName())) {
+            return;
+        }
+
+        rendererList.add(renderer);
+        LOG.info("Renderer [ {} ] added to [ {} ]", renderer.getName(), getUid());
+    }
+
+    public void removeRenderer(Renderer renderer) {
+
+    }
+
+    public void removeRenderer(String name) {
+
+    }
+
+    public void removeAllRenderers() {
+
+    }
+
+    public boolean hasRenderer(Renderer renderer) {
+        return false;
+    }
+
+    public boolean hasRenderer(String name) {
+        return false;
+    }
+
+    public Renderer getRenderer(String name) {
+        return null;
     }
 
     /* ############################################################################################

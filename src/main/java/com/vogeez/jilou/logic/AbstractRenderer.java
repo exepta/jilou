@@ -62,7 +62,7 @@ public abstract class AbstractRenderer implements Renderer {
 
     @Override
     public String getName() {
-        return name;
+        return name + "-" + localizedID;
     }
 
     @Override

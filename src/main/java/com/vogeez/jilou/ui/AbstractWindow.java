@@ -1,5 +1,6 @@
 package com.vogeez.jilou.ui;
 
+import com.vogeez.jilou.logic.Renderer;
 import lombok.Getter;
 import lombok.Setter;
 import org.lwjgl.glfw.GLFW;
@@ -91,15 +92,25 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
             NanoVG.nvgBeginFrame(context.nvgID(), getWidth(), getHeight(), 1f);
 
             render();
+            for(Renderer renderer : getRendererList()) {
+                renderer.render(this);
+            }
 
             NanoVG.nvgRestore(context.nvgID());
             NanoVG.nvgEndFrame(context.nvgID());
             return;
         }
         render();
+        for(Renderer renderer : getRendererList()) {
+            renderer.render(this);
+        }
     }
 
     private void rendererInitialize() {
-
+        for(Renderer renderer : getRendererList()) {
+            if(!renderer.isInitialized()) {
+                renderer.initialize();
+            }
+        }
     }
 }
