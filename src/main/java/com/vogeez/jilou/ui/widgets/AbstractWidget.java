@@ -51,6 +51,8 @@ public abstract class AbstractWidget implements ResizeAble {
         this.stylesheet = Stylesheet.builder().build();
     }
 
+    public abstract void update();
+
     /* ############################################################################################
      *
      *                                           Getter / Setter

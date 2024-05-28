@@ -36,4 +36,7 @@ public class Stylesheet {
     @Builder.Default
     private String position = "relative";
 
+    @Builder.Default
+    private String display = "block";
+
 }

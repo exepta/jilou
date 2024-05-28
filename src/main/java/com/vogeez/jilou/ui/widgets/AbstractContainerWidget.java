@@ -27,6 +27,11 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
         super(name);
     }
 
+    @Override
+    public void update() {
+
+    }
+
     public void addChild(AbstractWidget widget) {
         if(!hasChild(widget.getLocalizedID())) {
             widget.setParent(this);
