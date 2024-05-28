@@ -1,9 +1,9 @@
 package com.vogeez.jilou.logic.graphics.components;
 
 import com.vogeez.jilou.math.Radius;
-import com.vogeez.jilou.style.Color;
-import com.vogeez.jilou.style.ColorGradient;
-import com.vogeez.jilou.style.ColorStop;
+import com.vogeez.jilou.style.attributes.Color;
+import com.vogeez.jilou.style.attributes.ColorGradient;
+import com.vogeez.jilou.style.attributes.ColorStop;
 import com.vogeez.jilou.style.base.Background;
 import com.vogeez.jilou.ui.AbstractWindowFrame;
 import lombok.AccessLevel;

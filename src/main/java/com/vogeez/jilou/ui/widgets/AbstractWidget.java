@@ -1,10 +1,12 @@
 package com.vogeez.jilou.ui.widgets;
 
 import com.vogeez.jilou.ApplicationFactory;
+import com.vogeez.jilou.style.Stylesheet;
 import com.vogeez.jilou.ui.ResizeAble;
 import com.vogeez.jilou.ui.Window;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.Nullable;
 
 @Getter
 public abstract class AbstractWidget implements ResizeAble {
@@ -26,6 +28,8 @@ public abstract class AbstractWidget implements ResizeAble {
     @Setter
     private AbstractContainerWidget container;
 
+    private Stylesheet stylesheet;
+
     /* ############################################################################################
      *
      *                                           Constructors
@@ -44,6 +48,7 @@ public abstract class AbstractWidget implements ResizeAble {
         this.setName(name);
         this.parent = null;
         this.container = null;
+        this.stylesheet = Stylesheet.builder().build();
     }
 
     /* ############################################################################################
@@ -132,6 +137,13 @@ public abstract class AbstractWidget implements ResizeAble {
 
     public boolean hasParent() {
         return parent != null;
+    }
+
+    public void setStylesheet(@Nullable Stylesheet stylesheet) {
+        if(stylesheet == null) {
+            stylesheet = Stylesheet.builder().build();
+        }
+        this.stylesheet = stylesheet;
     }
 
     @Override

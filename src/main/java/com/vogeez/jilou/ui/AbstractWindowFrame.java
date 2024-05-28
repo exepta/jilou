@@ -3,7 +3,7 @@ package com.vogeez.jilou.ui;
 import com.vogeez.jilou.ApplicationFactory;
 import com.vogeez.jilou.logic.Renderer;
 import com.vogeez.jilou.logic.graphics.WidgetBackgroundRenderer;
-import com.vogeez.jilou.style.Color;
+import com.vogeez.jilou.style.attributes.Color;
 import lombok.Getter;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.nanovg.NanoVGGL2;
