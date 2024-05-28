@@ -73,7 +73,7 @@ public class NanoBackground {
         }
 
         ColorStop[] colors = gradient.getGradient();
-        for(int i = 0; i < colors.length; i++) {
+        for(int i = 0; i < colors.length -1; i++) {
             try (NVGPaint paint = NVGPaint.calloc()) {
                 float angle = gradient.getAngle();
 
