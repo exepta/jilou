@@ -21,6 +21,11 @@ public abstract class AbstractWidget implements ResizeAble {
 
     private String name;
 
+    @Setter
+    private AbstractContainerWidget parent;
+    @Setter
+    private AbstractContainerWidget container;
+
     /* ############################################################################################
      *
      *                                           Constructors
@@ -37,6 +42,8 @@ public abstract class AbstractWidget implements ResizeAble {
         this.setSize(0);
         this.setPosition(0);
         this.setName(name);
+        this.parent = null;
+        this.container = null;
     }
 
     /* ############################################################################################
@@ -121,6 +128,10 @@ public abstract class AbstractWidget implements ResizeAble {
             name = getWidgetName();
         }
         this.name = name;
+    }
+
+    public boolean hasParent() {
+        return parent != null;
     }
 
     @Override

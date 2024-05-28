@@ -29,8 +29,15 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
 
     public void addChild(AbstractWidget widget) {
         if(!hasChild(widget.getLocalizedID())) {
-            EventManager.callEvent(new WidgetAddEvent(widget, this, null));
+            EventManager.callEvent(new WidgetAddEvent(widget, this, getContainer()));
+            widget.setParent(this);
             children.add(widget);
+            if(isFirstLayerWidget()) {
+                widget.setContainer(this);
+                loadContainer(this);
+            } else {
+                widget.setContainer(getContainer());
+            }
             return;
         }
         LOG.warn("Duplicate child ID: [ {} ] type [ {} ]", widget.getLocalizedID(), widget.getWidgetName());
@@ -57,6 +64,15 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
 
     public boolean isFirstLayerWidget() {
         return getClass().getName().equals(Scene.class.getName());
+    }
+
+    protected void loadContainer(AbstractContainerWidget container) {
+        for(AbstractWidget widget : children) {
+            widget.setContainer(container);
+            if(widget instanceof AbstractContainerWidget containerWidget) {
+                containerWidget.loadContainer(container);
+            }
+        }
     }
 
 }
