@@ -1,5 +1,9 @@
 package com.vogeez.jilou.ui.widgets;
 
+import com.vogeez.jilou.events.widgets.WidgetAddEvent;
+import com.vogeez.jilou.events.widgets.WidgetRemoveEvent;
+import com.vogeez.jilou.logic.trigger.EventManager;
+import com.vogeez.jilou.ui.Scene;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +29,7 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
 
     public void addChild(AbstractWidget widget) {
         if(!hasChild(widget.getLocalizedID())) {
+            EventManager.callEvent(new WidgetAddEvent(widget, this, null));
             children.add(widget);
             return;
         }
@@ -33,6 +38,7 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
 
     public void removeChild(AbstractWidget widget) {
         if(hasChild(widget.getLocalizedID())) {
+            EventManager.callEvent(new WidgetRemoveEvent(widget, this, null));
             children.remove(widget);
             return;
         }
@@ -47,6 +53,10 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
         Optional<AbstractWidget> result = children.stream()
                 .findFirst().filter(child -> child.getLocalizedID().equals(localizedID));
         return result.orElse(null);
+    }
+
+    public boolean isFirstLayerWidget() {
+        return getClass().getName().equals(Scene.class.getName());
     }
 
 }

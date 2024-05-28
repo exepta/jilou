@@ -32,6 +32,11 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
     protected abstract void update(float delta);
     protected abstract void render();
 
+    public void setScene(Scene scene) {
+        this.scene = scene;
+        scene.update();
+    }
+
     @Override
     protected void initialize() {
         build();
@@ -57,6 +62,7 @@ public abstract class AbstractWindow extends AbstractWindowFrame {
                     if(scene == null) {
                         scene = new Scene();
                     }
+                    scene.update();
                 } else {
                     this.scene = null;
                 }
