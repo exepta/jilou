@@ -1,5 +1,9 @@
 package com.vogeez.jilou;
 
+import com.vogeez.jilou.events.JILOUPreLoadEvent;
+import com.vogeez.jilou.events.internal.WidgetInternalListener;
+import com.vogeez.jilou.logic.trigger.EventManager;
+import lombok.Getter;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,11 +12,14 @@ import org.slf4j.LoggerFactory;
  * @since 0.1.0-alpha
  * @author exepta
  */
-public final class UIApplication {
+public final class JILOUApplication {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UIApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JILOUApplication.class);
 
+    @Getter
     private static Class<?> applicationClass;
+
+    @Getter
     private static boolean loaded;
 
     /**
@@ -27,12 +34,14 @@ public final class UIApplication {
             LOG.warn("Application is already loaded. Skipping loading. by [ {} ]", applicationClass.getSimpleName());
             return;
         }
+        initializeListener();
         LOG.info("Loading application...");
         Configuration.setFromArguments(args);
         applicationClass = getApplication();
-        if(applicationClass.equals(UIApplication.class)) {
+        if(applicationClass.equals(JILOUApplication.class)) {
             throw new RuntimeException("The application class is not a UI application.");
         }
+        EventManager.callEvent(new JILOUPreLoadEvent(applicationClass));
         initializeLWJGL();
         Configuration.printVersion();
         loaded = true;
@@ -53,7 +62,7 @@ public final class UIApplication {
 
     /**
      * Function for fetch the current class which is using this application ui management.
-     * The function will return{@link UIApplication}if there was no class found by the
+     * The function will return{@link JILOUApplication}if there was no class found by the
      * given{@link StackTraceElement}.
      * @return {@link Class}- application class.
      * @apiNote This function is useful if you need your main class as reference in other classes
@@ -72,23 +81,13 @@ public final class UIApplication {
             applicationClass = Class.forName(path);
         } catch (ClassNotFoundException exception) {
             LOG.error("Could not load application class", exception);
-            applicationClass = UIApplication.class;
+            applicationClass = JILOUApplication.class;
         }
         return applicationClass;
     }
 
-    /**
-     * @return {@link Class}- is better than call {@link #getApplication()}
-     * because it will fetch and update the class which is useless.
-     */
-    public static Class<?> getApplicationClass() {
-        return applicationClass;
+    private static void initializeListener() {
+        EventManager.registerListener(new WidgetInternalListener());
     }
 
-    /**
-     * @return {@link Boolean}- true if the application already running by a parent application.
-     */
-    public static boolean isLoaded() {
-        return loaded;
-    }
 }
