@@ -2,10 +2,11 @@ package com.vogeez.jilou.example;
 
 import com.vogeez.jilou.ApplicationFactory;
 import com.vogeez.jilou.JILOUApplication;
+import com.vogeez.jilou.math.align.Alignment;
 import com.vogeez.jilou.style.attributes.Color;
 import com.vogeez.jilou.style.base.Background;
 import com.vogeez.jilou.ui.Window;
-import com.vogeez.jilou.ui.layout.Pane;
+import com.vogeez.jilou.ui.layout.AlignPane;
 import com.vogeez.jilou.ui.widgets.elements.DivWidget;
 
 public class FirstWindowExample {
@@ -17,14 +18,15 @@ public class FirstWindowExample {
 
         DivWidget widget01 = new DivWidget();
         widget01.getStylesheet().setBackground(Background.color(Color.CORAL));
+        widget01.setSize(200);
+        widget01.getStylesheet().setAlignment(Alignment.CENTER);
 
-        DivWidget widget02 = new DivWidget();
+/*        DivWidget widget02 = new DivWidget();
         widget02.getStylesheet().setBackground(Background.color(Color.RED));
-        widget02.setPositionX(200);
+        widget02.setPositionX(200);*/
 
-        Pane pane = new Pane();
+        AlignPane pane = new AlignPane();
         pane.addChild(widget01);
-        pane.addChild(widget02);
 
         window.getScene().addChild(pane);
     }

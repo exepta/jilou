@@ -1,6 +1,7 @@
 package com.vogeez.jilou.style;
 
 import com.vogeez.jilou.math.Insets;
+import com.vogeez.jilou.math.align.Alignment;
 import com.vogeez.jilou.style.attributes.Color;
 import com.vogeez.jilou.style.base.Background;
 import lombok.Builder;
@@ -38,5 +39,8 @@ public class Stylesheet {
 
     @Builder.Default
     private String display = "block";
+
+    @Builder.Default
+    private Alignment alignment = Alignment.TOP_LEFT;
 
 }
