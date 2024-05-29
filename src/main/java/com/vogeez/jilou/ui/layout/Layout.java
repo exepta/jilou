@@ -15,6 +15,7 @@ public abstract class Layout extends AbstractContainerWidget {
 
     @Override
     public void update() {
+        super.update();
         logic();
     }
 }
