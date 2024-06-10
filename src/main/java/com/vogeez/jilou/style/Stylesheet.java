@@ -4,6 +4,7 @@ import com.vogeez.jilou.math.Insets;
 import com.vogeez.jilou.math.align.Alignment;
 import com.vogeez.jilou.style.attributes.Color;
 import com.vogeez.jilou.style.base.Background;
+import com.vogeez.jilou.style.base.Display;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +39,7 @@ public class Stylesheet {
     private String position = "relative";
 
     @Builder.Default
-    private String display = "block";
+    private Display display = Display.block();
 
     @Builder.Default
     private Alignment alignment = Alignment.TOP_LEFT;
