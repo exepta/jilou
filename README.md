@@ -38,14 +38,21 @@ As Example:
 
 This is the goal and many more features.
 
-### Version 0.1.0-alpha (development)
+### Version 0.2.0-alpha (development)
 > #### Window
-> + Have all functions which needed to work with them. A list with the current working
->   functions coming soon.
+> + Have now an update function with ups param.
 
-> #### AbstractWindowFrame
-> + Have the ability to provide windows. You can create new windows with them. Only need to extend
->   the AbstractWindowFrame.
-> + Every window works in his own Thread, this make is easier to work with them.
-> + You have the ability to say what will be doe at initialization, update or destroy state.
->   A full list with examples will come soon.
+> #### Stylesheet
+> + Is now used at many classes for handling styles.
+> + Can be used for handle css as design pattern for widgets.
+
+> #### Scene
+> + NEW implemented for handling multiple ui's in one window.
+>   Can only be used at AbstractWindow.
+> + Have a layout system for handle alignment, padding and margin.
+
+> #### Other
+> + Color utils which supported color gradients.
+> + Bounds and Insets calculation.
+> + Event management like minecraft. (Port from EventAPI written by Niklas Tat)
+> + NanoVG helper engine at the logic package.
