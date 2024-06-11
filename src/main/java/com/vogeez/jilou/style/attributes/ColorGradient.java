@@ -1,4 +1,4 @@
-package com.vogeez.jilou.style;
+package com.vogeez.jilou.style.attributes;
 
 import lombok.Getter;
 

@@ -3,6 +3,7 @@ package com.vogeez.jilou.ui.widgets;
 import com.vogeez.jilou.events.widgets.WidgetAddEvent;
 import com.vogeez.jilou.events.widgets.WidgetRemoveEvent;
 import com.vogeez.jilou.logic.trigger.EventManager;
+import com.vogeez.jilou.style.Stylesheet;
 import com.vogeez.jilou.ui.Scene;
 import lombok.Getter;
 import org.slf4j.Logger;
@@ -25,6 +26,23 @@ public abstract class AbstractContainerWidget extends AbstractWidget {
 
     public AbstractContainerWidget(String name) {
         super(name);
+    }
+
+    @Override
+    public void update() {
+        Stylesheet sheet = getStylesheet();
+        switch (sheet.getDisplay()) {
+            case "block" -> calcDisplayBlock();
+            case "flex" -> calcDisplayFlex();
+        }
+    }
+
+    private void calcDisplayBlock() {
+
+    }
+
+    private void calcDisplayFlex() {
+
     }
 
     public void addChild(AbstractWidget widget) {

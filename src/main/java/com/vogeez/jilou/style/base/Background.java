@@ -1,8 +1,8 @@
 package com.vogeez.jilou.style.base;
 
 import com.vogeez.jilou.math.Radius;
-import com.vogeez.jilou.style.Color;
-import com.vogeez.jilou.style.ColorGradient;
+import com.vogeez.jilou.style.attributes.Color;
+import com.vogeez.jilou.style.attributes.ColorGradient;
 import lombok.Getter;
 import lombok.Setter;
 

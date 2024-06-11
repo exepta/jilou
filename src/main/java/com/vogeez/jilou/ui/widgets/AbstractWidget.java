@@ -1,10 +1,13 @@
 package com.vogeez.jilou.ui.widgets;
 
 import com.vogeez.jilou.ApplicationFactory;
+import com.vogeez.jilou.math.Bounds;
+import com.vogeez.jilou.style.Stylesheet;
 import com.vogeez.jilou.ui.ResizeAble;
 import com.vogeez.jilou.ui.Window;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.Nullable;
 
 @Getter
 public abstract class AbstractWidget implements ResizeAble {
@@ -14,10 +17,11 @@ public abstract class AbstractWidget implements ResizeAble {
     private double width;
     private double height;
 
-    @Setter
     private double positionX;
-    @Setter
+
     private double positionY;
+
+    private final Bounds bounds;
 
     private String name;
 
@@ -25,6 +29,8 @@ public abstract class AbstractWidget implements ResizeAble {
     private AbstractContainerWidget parent;
     @Setter
     private AbstractContainerWidget container;
+
+    private Stylesheet stylesheet;
 
     /* ############################################################################################
      *
@@ -39,12 +45,16 @@ public abstract class AbstractWidget implements ResizeAble {
      */
     public AbstractWidget(String name) {
         this.localizedID = ApplicationFactory.giveUniqueID();
+        this.bounds = new Bounds(0, 0, 0, 0);
         this.setSize(0);
         this.setPosition(0);
         this.setName(name);
         this.parent = null;
         this.container = null;
+        this.stylesheet = Stylesheet.builder().build();
     }
+
+    public abstract void update();
 
     /* ############################################################################################
      *
@@ -87,6 +97,9 @@ public abstract class AbstractWidget implements ResizeAble {
             width = 0;
         }
         this.width = width;
+        if(bounds != null) {
+            bounds.set(positionX, positionY, width + positionX, height);
+        }
     }
 
     /**
@@ -98,6 +111,9 @@ public abstract class AbstractWidget implements ResizeAble {
             height = 0;
         }
         this.height = height;
+        if(bounds != null) {
+            bounds.set(positionX, positionY, width, height + positionY);
+        }
     }
 
     /**
@@ -119,6 +135,20 @@ public abstract class AbstractWidget implements ResizeAble {
         this.setPositionY(y);
     }
 
+    public void setPositionX(double positionX) {
+        this.positionX = positionX;
+        if(bounds != null) {
+            bounds.set(positionX, positionY, width + positionX, height);
+        }
+    }
+
+    public void setPositionY(double positionY) {
+        this.positionY = positionY;
+        if(bounds != null) {
+            bounds.set(positionX, positionY, width, height + positionY);
+        }
+    }
+
     /**
      * Function to set a name. Is {@link #getWidgetName()} if the param null.
      * @param name widget name readable and set by the programmer.
@@ -132,6 +162,13 @@ public abstract class AbstractWidget implements ResizeAble {
 
     public boolean hasParent() {
         return parent != null;
+    }
+
+    public void setStylesheet(@Nullable Stylesheet stylesheet) {
+        if(stylesheet == null) {
+            stylesheet = Stylesheet.builder().build();
+        }
+        this.stylesheet = stylesheet;
     }
 
     @Override
