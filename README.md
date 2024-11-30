@@ -1,5 +1,8 @@
 # JILOU UI Framework
 
+# PROJECT WAS MOVED TO
+## https://github.com/jilou-team/jilou-ui
+
 ### Examples
 #### How to create a new window?
 
